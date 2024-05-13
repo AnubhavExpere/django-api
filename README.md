@@ -3,7 +3,7 @@
 ## Overview
 The Playlist Management API is designed to manage songs and playlists. It provides endpoints for creating, listing, editing, and deleting songs and playlists.
 
-#       *IMPORTANT: ***Always add trailing slash at the end of the URL for API to get the expected response***
+#       *IMPORTANT: ***Ensure that there is always a trailing slash at the end of the URL when making API requests to receive the expected response.***
 
 ### 1. Create New Song
 This endpoint adds a new song to the database.

@@ -26,7 +26,7 @@ class SongsViewSet(ModelViewSet):
         serializer = SongSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(status=status.HTTP_201_CREATED)
+            return Response({"message": "The song entry has been created."}, status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         
@@ -55,14 +55,14 @@ class PlaylistViewSet(ModelViewSet):
             PlaylistSong.objects.create(playlist=playlist, song=song, position=position)
 
         serializer = PlaylistSerializer(playlist)
-        return Response(status=status.HTTP_201_CREATED)    
+        return Response({"message":"The playlist entry has been created."}, status=status.HTTP_201_CREATED)    
 
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
-        return Response(status=status.HTTP_200_OK)
+        return Response({"message":"The name of the playlist has been edited."}, status=status.HTTP_200_OK)
     
 class PlaylistSongViewSet(ModelViewSet):
     queryset = PlaylistSong.objects.all()
@@ -106,7 +106,7 @@ class PlaylistSongViewSet(ModelViewSet):
             playlist_song.position = position
             playlist_song.save()
 
-        return Response(status=status.HTTP_200_OK)
+        return Response({"message":"Song has been moved to the new position in the playlist."}, status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
         print("destroy")
@@ -133,4 +133,4 @@ class PlaylistSongViewSet(ModelViewSet):
 
             playlist_song.position = position
             playlist_song.save()
-        return Response(status=status.HTTP_200_OK)
+        return Response({"message":" Song has been removed from the playlist"}, status=status.HTTP_200_OK)
